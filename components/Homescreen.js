@@ -38,6 +38,7 @@ class HomeScreen extends React.Component {
       return (
         <View style={styles.container}>
           <FlatList
+            style={styles.itemContainer}
             data={[1,2,3,4,5]}
             extraData={this.state}
             keyExtractor={this._keyExtractor}
@@ -54,7 +55,12 @@ const styles = StyleSheet.create({
         marginLeft: 0,
         paddingRight: 0,
         alignItems: 'center',
-        justifyContent: 'center' 
+        justifyContent: 'center',
+    },
+    itemContainer: {
+        width: '95%',
+        marginTop: 15,
+        marginBottom: 15
     }
 })
 
