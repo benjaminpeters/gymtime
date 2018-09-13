@@ -5,14 +5,12 @@ var moment = require('moment');
 class WorkoutItem extends React.Component {
   
     render() {
-
-        const date = new Date();
         
       return (
         <View style={styles.container}>
             <View style={styles.dateContainer}>
-                <Text>{moment().format('dddd')}</Text>
-                <Text>{moment().format("MMM Do YY")}</Text>
+                <Text>{this.props.date.format('dddd')}</Text>
+                <Text>{this.props.date.format("MMM Do YY")}</Text>
             </View>
         </View>
       );
@@ -25,10 +23,13 @@ class WorkoutItem extends React.Component {
         backgroundColor: "#fff",
         height: 150,
         marginBottom: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
       },
       dateContainer: {
         alignSelf:'center',
         justifyContent: 'center',
+        paddingLeft: 15
       }
   })
 

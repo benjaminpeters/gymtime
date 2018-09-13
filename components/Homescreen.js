@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, View, Text, FlatList, StyleSheet } from 'react-native';
 import WorkoutItem from './WorkoutItem'
+var moment = require('moment');
 
 class HomeScreen extends React.Component {
 
@@ -30,16 +31,31 @@ class HomeScreen extends React.Component {
 
     _renderItem = ({item}) => (
         <WorkoutItem
-            title={item}
+            date={item.date}
         />
       );
     
     render() {
+
+        const testData = [
+            {
+                key: '1',
+                date: moment()
+            },
+            {
+                key: '2',
+                date: moment("20120620")
+            },
+            {
+                key: '3',
+                date: moment("20111031")
+            }
+        ]
       return (
         <View style={styles.container}>
           <FlatList
             style={styles.itemContainer}
-            data={[1,2,3,4,5]}
+            data={testData}
             extraData={this.state}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderItem}
