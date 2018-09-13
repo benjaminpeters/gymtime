@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     },
     itemContainer: {
         width: '95%',
-        marginTop: 15,
-        marginBottom: 15
+        paddingTop: 15,
+        paddingBottom: 20
     }
 })
 
