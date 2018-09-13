@@ -32,6 +32,7 @@ class HomeScreen extends React.Component {
     _renderItem = ({item}) => (
         <WorkoutItem
             date={item.date}
+            type={item.type}
         />
       );
     
@@ -40,15 +41,24 @@ class HomeScreen extends React.Component {
         const testData = [
             {
                 key: '1',
-                date: moment()
+                date: moment(),
+                type: 'Legs',
+                workout: {
+                    deadlift: [135, 6],
+                    latPulldown: [130,10],
+                    seatedRow: [65, 10],
+
+                }
             },
             {
                 key: '2',
-                date: moment("20120620")
+                date: moment("20120620"),
+                type: 'Back'
             },
             {
                 key: '3',
-                date: moment("20111031")
+                date: moment("20111031"),
+                type: 'Chest'
             }
         ]
       return (

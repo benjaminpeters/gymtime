@@ -11,6 +11,7 @@ class WorkoutItem extends React.Component {
             <View style={styles.dateContainer}>
                 <Text>{this.props.date.format('dddd')}</Text>
                 <Text>{this.props.date.format("MMM Do YY")}</Text>
+                <Text>{this.props.type}</Text>
             </View>
         </View>
       );
