@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, View, Text, FlatList, StyleSheet } from 'react-native';
+import WorkoutItem from './WorkoutItem'
 
 class HomeScreen extends React.Component {
 
@@ -26,11 +27,22 @@ class HomeScreen extends React.Component {
             otherParam: 'anything you want here',
         });
     }
+
+    _renderItem = ({item}) => (
+        <WorkoutItem
+            title={item}
+        />
+      );
     
     render() {
       return (
         <View style={styles.container}>
-          <Text>Home Screen</Text>
+          <FlatList
+            data={[1,2,3,4,5]}
+            extraData={this.state}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderItem}
+            />
         </View>
       );
     }
@@ -39,6 +51,8 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
     container: { 
         flex: 1,
+        marginLeft: 0,
+        paddingRight: 0,
         alignItems: 'center',
         justifyContent: 'center' 
     }
