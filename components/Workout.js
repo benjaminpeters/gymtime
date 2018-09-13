@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, StyleSheet } from 'react-native';
 
 class Workout extends React.Component {
     static navigationOptions = {
@@ -10,7 +10,7 @@ class Workout extends React.Component {
       const { navigation } = this.props;
   
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={styles.container}>
           <Text>Workout Screen</Text>
           <Button
             title="Go back"
@@ -21,4 +21,12 @@ class Workout extends React.Component {
     }
   }
 
-  export default Workout;
+const styles = StyleSheet.create({
+    container: { 
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center' 
+    }
+})
+
+export default Workout;
