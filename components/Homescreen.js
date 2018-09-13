@@ -3,14 +3,7 @@ import { Button, View, Text } from 'react-native';
 
 class HomeScreen extends React.Component {
     static navigationOptions = {
-      title: 'Home',
-      headerStyle: {
-        backgroundColor: '#f4511e',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
+      title: 'GYMTIME',
     };
     
   
@@ -19,10 +12,10 @@ class HomeScreen extends React.Component {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text>Home Screen</Text>
           <Button
-            title="Go to Details"
+            title="Add Workout"
             onPress={() => {
               /* 1. Navigate to the Details route with params */
-              this.props.navigation.navigate('Details', {
+              this.props.navigation.navigate('Workout', {
                 itemId: 86,
                 otherParam: 'anything you want here',
               });
