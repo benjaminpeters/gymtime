@@ -31,6 +31,7 @@ class WorkoutItem extends React.Component {
         backgroundColor: "#fff",
         height: 150,
         marginBottom: 15,
+        paddingTop: 15,
         flexDirection: 'row',
         alignItems: 'center',
       },
