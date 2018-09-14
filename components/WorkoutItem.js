@@ -13,6 +13,13 @@ class WorkoutItem extends React.Component {
                 <Text>{this.props.date.format("MMM Do YY")}</Text>
                 <Text>{this.props.type}</Text>
             </View>
+            <View style={styles.liftContainer}>
+                {this.props.workout && this.props.workout.map((value) => {
+                    return (
+                        <Text>{value}</Text>
+                    );
+                })}
+            </View>
         </View>
       );
     }
@@ -31,6 +38,11 @@ class WorkoutItem extends React.Component {
         alignSelf:'center',
         justifyContent: 'center',
         paddingLeft: 15
+      },
+      liftContainer:{
+        paddingLeft: 25,
+        flex: 1,
+        flexWrap:'wrap'
       }
   })
 

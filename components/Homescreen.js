@@ -33,6 +33,7 @@ class HomeScreen extends React.Component {
         <WorkoutItem
             date={item.date}
             type={item.type}
+            workout={item.workout}
         />
       );
     
@@ -41,24 +42,41 @@ class HomeScreen extends React.Component {
         const testData = [
             {
                 key: '1',
-                date: moment(),
-                type: 'Legs',
-                workout: {
-                    deadlift: [135, 6],
-                    latPulldown: [130,10],
-                    seatedRow: [65, 10],
-
-                }
+                date: moment("20180913"),
+                type: 'Leg',
+                workout: [
+                    'Squats',
+                    'Leg Press',
+                    'Laying Leg Curl',
+                    'Seated Leg Extension',
+                    'Seated Leg Curl',
+                    'Squats',
+                    'Leg Press',
+                    'Laying Leg Curl',
+                    'Seated Leg Extension',
+                    'Seated Leg Curl',
+                    'Squats',
+                    'Leg Press',
+                    'Laying Leg Curl',
+                    'Seated Leg Extension',
+                    'Seated Leg Curl',
+                ]
             },
             {
                 key: '2',
-                date: moment("20120620"),
-                type: 'Back'
+                date: moment("20180915"),
+                type: 'Back',
+                workout: [
+                    'Deadlift',
+                    'Lat Pulldown',
+                    'Seated Row'
+                ]
             },
             {
                 key: '3',
                 date: moment("20111031"),
-                type: 'Chest'
+                type: 'Chest',
+                
             }
         ]
       return (
@@ -86,7 +104,7 @@ const styles = StyleSheet.create({
     itemContainer: {
         width: '95%',
         paddingTop: 15,
-        paddingBottom: 20
+        paddingBottom: 20,
     }
 })
 
