@@ -1,6 +1,5 @@
 import React from 'react';
-import { Dimensions, View, Text, StyleSheet } from 'react-native';
-var moment = require('moment');
+import { View, Text, StyleSheet } from 'react-native';
 
 class WorkoutItem extends React.Component {
   

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button, View, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation'; 
 import HomeScreen from './components/Homescreen'
 import Workout from './components/Workout'

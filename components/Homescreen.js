@@ -50,16 +50,6 @@ class HomeScreen extends React.Component {
                     'Laying Leg Curl',
                     'Seated Leg Extension',
                     'Seated Leg Curl',
-                    'Squats',
-                    'Leg Press',
-                    'Laying Leg Curl',
-                    'Seated Leg Extension',
-                    'Seated Leg Curl',
-                    'Squats',
-                    'Leg Press',
-                    'Laying Leg Curl',
-                    'Seated Leg Extension',
-                    'Seated Leg Curl',
                 ]
             },
             {
@@ -69,7 +59,8 @@ class HomeScreen extends React.Component {
                 workout: [
                     'Deadlift',
                     'Lat Pulldown',
-                    'Seated Row'
+                    'Seated Row',
+                    'Chin ups',
                 ]
             },
             {
