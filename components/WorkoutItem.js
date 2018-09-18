@@ -15,7 +15,7 @@ class WorkoutItem extends React.Component {
             <View style={styles.liftContainer}>
                 {this.props.workout && this.props.workout.map((value) => {
                     return (
-                        <Text>{value}</Text>
+                        <Text>{value['exercise']}</Text>
                     );
                 })}
             </View>

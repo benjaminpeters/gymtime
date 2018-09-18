@@ -45,11 +45,41 @@ class HomeScreen extends React.Component {
                 date: moment("20180913"),
                 type: 'Leg',
                 workout: [
-                    'Squats',
-                    'Leg Press',
-                    'Laying Leg Curl',
-                    'Seated Leg Extension',
-                    'Seated Leg Curl',
+                    {   
+                        'exercise': 'Squats',
+                        'sets': [
+                            {
+                                '1': {
+                                    'reps': 10,
+                                    'weight': 135
+                                }
+                            },
+                                {
+                                '2': {
+                                    'reps': 10,
+                                    'weight': 155
+                                }
+                            }, 
+                                {
+                                '3': {
+                                    'reps': 10,
+                                    'weight': 175
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        'exercise': 'Leg Press'
+                    },
+                    {
+                        'exercise': 'Laying Leg Curl'
+                    },
+                    {
+                        'exercise': 'Seated Leg Extension'
+                    },
+                    {
+                        'exercise': 'Seated Leg Curl'
+                    }
                 ]
             },
             {
@@ -57,10 +87,18 @@ class HomeScreen extends React.Component {
                 date: moment("20180915"),
                 type: 'Back',
                 workout: [
-                    'Deadlift',
-                    'Lat Pulldown',
-                    'Seated Row',
-                    'Chin ups',
+                    {
+                        'exercise': 'Deadlift'
+                    },
+                    {
+                        'exercise': 'Lat Pulldown'
+                    },
+                    {
+                        'exercise': 'Seated Row'
+                    },
+                    {
+                        'exercise': 'Chin ups'
+                    }
                 ]
             },
             {

@@ -19,8 +19,10 @@ class Workout extends React.Component {
       return (
         <View style={styles.container}>
           <View style={styles.itemContainer}>
-            <View style={styles.addItemcontainer}>
+          <View>
+            <View style={styles.addItemContainer}>
               <Text>wassup</Text>
+            </View>
             </View>
           </View>
           <FlatList
@@ -51,10 +53,7 @@ const styles = StyleSheet.create({
   addItemContainer: {
     backgroundColor: "#fff",
     height: 150,
-    marginBottom: 15,
     paddingTop: 15,
-    flexDirection: 'row',
-    alignItems: 'center',
   }
 })
 
