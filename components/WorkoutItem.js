@@ -1,25 +1,30 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 
 class WorkoutItem extends React.Component {
   
+    handleWorkoutTouch = () => {
+        alert("sup")
+    }
+
     render() {
-        
       return (
-        <View style={styles.container}>
-            <View style={styles.dateContainer}>
-                <Text>{this.props.date.format('dddd')}</Text>
-                <Text>{this.props.date.format("MMM Do YY")}</Text>
-                <Text>{this.props.type}</Text>
+        <TouchableHighlight onPress={this.handleWorkoutTouch} underlayColor="transparent">
+            <View style={styles.container}>
+                <View style={styles.dateContainer}>
+                    <Text>{this.props.date.format('dddd')}</Text>
+                    <Text>{this.props.date.format("MMM Do YY")}</Text>
+                    <Text>{this.props.type}</Text>
+                </View>
+                <View style={styles.liftContainer}>
+                    {this.props.workout && this.props.workout.map((value) => {
+                        return (
+                            <Text>{value['exercise']}</Text>
+                        );
+                    })}
+                </View>
             </View>
-            <View style={styles.liftContainer}>
-                {this.props.workout && this.props.workout.map((value) => {
-                    return (
-                        <Text>{value['exercise']}</Text>
-                    );
-                })}
-            </View>
-        </View>
+        </TouchableHighlight>
       );
     }
   }
@@ -30,7 +35,7 @@ class WorkoutItem extends React.Component {
         backgroundColor: "#fff",
         height: 150,
         marginBottom: 15,
-        paddingTop: 15,
+        marginTop: 15,
         flexDirection: 'row',
         alignItems: 'center',
       },
