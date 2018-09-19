@@ -1,17 +1,44 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import {Button, FlatList } from 'react-native';
 import { View, Text, StyleSheet } from 'react-primitives';
 import LiftItem from './LiftItem';
 
 class Workout extends React.Component {
-    static navigationOptions = {
-      title: 'Workout',
+
+  constructor(props) {
+    super(props);
+      this.state = { data: []};
+    }
+
+    componentDidMount() {
+      this.props.navigation.setParams({ _addItem: this._addItem });
+    }
+  
+    static navigationOptions = ({ navigation }) => {
+      return {
+        title: 'Workout',
+        headerRight: (
+          <Button
+            onPress={navigation.getParam('_addItem')}
+            title="+"
+            color="#fff"
+          />
+        ),
+      }
+    };
+
+    _addItem = () => {
+      this.setState((prevState) => ({
+        data: prevState.data.concat('Bench')
+       }));
     };
   
 
     _renderItem = ({item}) => (
       <View>
-        <LiftItem/>
+        <LiftItem
+          data = {item}
+          />
       </View>
     );
 
@@ -21,13 +48,13 @@ class Workout extends React.Component {
           <View style={styles.itemContainer}>
           <View>
             <View style={styles.addItemContainer}>
-              <Text>wassup</Text>
+              
             </View>
             </View>
           </View>
           <FlatList
             style={styles.itemContainer}
-            data={[1,2,3]}
+            data={this.state.data}
             extraData={this.state}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderItem}

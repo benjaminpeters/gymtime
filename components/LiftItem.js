@@ -7,7 +7,7 @@ class LiftItem extends React.Component {
         
       return (
         <View style={styles.container}>
-            <Text>sup</Text>
+            <Text>{this.props.data}</Text>
         </View>
       );
     }
