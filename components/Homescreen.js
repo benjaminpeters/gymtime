@@ -22,9 +22,9 @@ class HomeScreen extends React.Component {
             };
         }
 
-    onAddWorkout = () => {
+    onAddWorkout = (data) => {
         this.props.navigation.navigate('Workout', {
-            itemId: 86,
+            workoutData: data,
             otherParam: 'anything you want here',
         });
     }

@@ -4,7 +4,7 @@ import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 class WorkoutItem extends React.Component {
   
     handleWorkoutTouch = () => {
-        this.props.openWorkout();
+        this.props.openWorkout(this.props.workout);
     }
 
     render() {

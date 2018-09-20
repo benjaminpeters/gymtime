@@ -12,6 +12,16 @@ class Workout extends React.Component {
 
     componentDidMount() {
       this.props.navigation.setParams({ _addItem: this._addItem });
+    
+      if(this.props.navigation.getParam("workoutData")) {
+        this.setState(() => ({
+          data: this.props.navigation.getParam("workoutData").map((value) => {
+            return (
+                value['exercise']
+            );
+          })
+         }));
+      }
     }
   
     static navigationOptions = ({ navigation }) => {
