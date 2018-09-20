@@ -4,10 +4,11 @@ import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 class WorkoutItem extends React.Component {
   
     handleWorkoutTouch = () => {
-        alert("sup")
+        this.props.openWorkout();
     }
 
     render() {
+        
       return (
         <TouchableHighlight onPress={this.handleWorkoutTouch} underlayColor="transparent">
             <View style={styles.container}>

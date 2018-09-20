@@ -34,12 +34,55 @@ class HomeScreen extends React.Component {
             date={item.date}
             type={item.type}
             workout={item.workout}
+            openWorkout={this.onAddWorkout}
         />
       );
     
     render() {
 
         const testData = [
+            {
+                key: '4',
+                date: moment("20180918"),
+                type: 'Back',
+                workout: [
+                    {   
+                        'exercise': 'DeadLifts',
+                        'sets': [
+                            {
+                                '1': {
+                                    'reps': 10,
+                                    'weight': 135
+                                }
+                            },
+                                {
+                                '2': {
+                                    'reps': 10,
+                                    'weight': 135
+                                }
+                            }, 
+                                {
+                                '3': {
+                                    'reps': 10,
+                                    'weight': 135
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        'exercise': 'Lat Pulldown'
+                    },
+                    {
+                        'exercise': 'Seated Cable Row'
+                    },
+                    {
+                        'exercise': 'Low Back Extension'
+                    },
+                    {
+                        'exercise': 'Machine Row'
+                    }
+                ]
+            },
             {
                 key: '1',
                 date: moment("20180913"),
