@@ -6,7 +6,7 @@ var moment = require('moment');
 class HomeScreen extends React.Component {
 
     componentDidMount() {
-        this.props.navigation.setParams({ onAddWorkout: this.onAddWorkout });
+        this.props.navigation.setParams({ handleOpenWorkout: this.handleOpenWorkout });
       }
 
       static navigationOptions = ({ navigation }) => {
@@ -14,7 +14,7 @@ class HomeScreen extends React.Component {
             title: 'GYMTIME',
             headerRight: (
                 <Button
-                    onPress={navigation.getParam('onAddWorkout')}
+                    onPress={navigation.getParam('handleOpenWorkout')}
                     title="Add"
                     color="#fff"
                 />
@@ -25,7 +25,12 @@ class HomeScreen extends React.Component {
     onAddWorkout = (data) => {
         this.props.navigation.navigate('Workout', {
             workoutData: data,
-            otherParam: 'anything you want here',
+        });
+    }
+
+    handleOpenWorkout = (data) => {
+        this.props.navigation.navigate('Workout', {
+            workoutData:  undefined
         });
     }
 
