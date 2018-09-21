@@ -31,7 +31,8 @@ class HomeScreen extends React.Component {
 
     handleOpenWorkout = (data) => {
         this.props.navigation.navigate('Workout', {
-            workoutData:  undefined
+            workoutData:  undefined,
+            workoutDate: moment()
         });
     }
 
