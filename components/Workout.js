@@ -65,7 +65,7 @@ class Workout extends React.Component {
             style={styles.itemContainer}
             data={this.state.data}
             extraData={this.state}
-            keyExtractor={this._keyExtractor}
+            _keyExtractor = {(item, index) => item.id}
             renderItem={this._renderItem}
             />
         </View>
