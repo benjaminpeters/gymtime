@@ -22,9 +22,10 @@ class HomeScreen extends React.Component {
             };
         }
 
-    onAddWorkout = (data) => {
+    onAddWorkout = (data, date) => {
         this.props.navigation.navigate('Workout', {
             workoutData: data,
+            workoutDate: date
         });
     }
 

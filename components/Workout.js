@@ -12,6 +12,7 @@ class Workout extends React.Component {
 
     componentDidMount() {
       this.props.navigation.setParams({ _addItem: this._addItem });
+
       if(this.props.navigation.getParam("workoutData") != undefined) {
         this.setState(() => ({
           data: this.props.navigation.getParam("workoutData").map((value) => {
@@ -25,7 +26,7 @@ class Workout extends React.Component {
   
     static navigationOptions = ({ navigation }) => {
       return {
-        title: 'Workout',
+        title: navigation.getParam("workoutDate").format("ddd MMM Do YYYY"),
         headerRight: (
           <Button
             onPress={navigation.getParam('_addItem')}
