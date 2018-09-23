@@ -10,7 +10,10 @@ class Workout extends React.Component {
       this.state = { 
         data: [],
         workoutDay: '',
-        currentExercise: ''
+        currentExercise: '',
+        currentSet: '',
+        currentReps: '',
+        currentWeight: ''
       };
     }
 
@@ -65,16 +68,36 @@ class Workout extends React.Component {
               <View>
                 <Text>Day: </Text>
                 <TextInput
-                  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                  style={styles.input}
                   onChangeText={(workoutDay) => this.setState({workoutDay})}
                   value={this.state.workoutDay}
                 />
                 <Text>Exercise: </Text>
                 <TextInput
-                  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                  style={styles.input}
                   onChangeText={(currentExercise) => this.setState({currentExercise})}
                   value={this.state.currentExercise}
                 />
+                <View style={styles.exerciseStats}s>
+                  <Text>Set: </Text>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={(currentSet) => this.setState({currentSet})}
+                    value={this.state.currentSet}
+                  />
+                  <Text>Rep: </Text>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={(currentReps) => this.setState({currentReps})}
+                    value={this.state.currentReps}
+                  />
+                  <Text>Weight: </Text>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={(currentWeight) => this.setState({currentWeight})}
+                    value={this.state.currentWeight}
+                  />
+                </View>
                 </View>
               </View>
             </View>
@@ -92,7 +115,7 @@ class Workout extends React.Component {
   }
 
 const styles = StyleSheet.create({
-    container: { 
+  container: { 
       flex: 1,
       marginLeft: 0,
       paddingRight: 0,
@@ -108,6 +131,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     height: 150,
     paddingTop: 15,
+  },
+  input: {
+    borderColor: 'gray', 
+    borderWidth: 1,
+  },
+  exerciseStats :{
+    // flex: 1, 
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
   }
 })
 
