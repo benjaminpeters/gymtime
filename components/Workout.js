@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, FlatList } from 'react-native';
+import {Button, FlatList, TextInput } from 'react-native';
 import { View, Text, StyleSheet } from 'react-primitives';
 import LiftItem from './LiftItem';
 
@@ -7,7 +7,11 @@ class Workout extends React.Component {
 
   constructor(props) {
     super(props);
-      this.state = { data: []};
+      this.state = { 
+        data: [],
+        workoutDay: '',
+        currentExercise: ''
+      };
     }
 
     componentDidMount() {
@@ -39,7 +43,7 @@ class Workout extends React.Component {
 
     _addItem = () => {
       this.setState((prevState) => ({
-        data: prevState.data.concat('Bench')
+        data: prevState.data.concat(this.state.currentExercise)
        }));
     };
   
@@ -58,8 +62,21 @@ class Workout extends React.Component {
           <View style={styles.itemContainer}>
           <View>
             <View style={styles.addItemContainer}>
-              
-            </View>
+              <View>
+                <Text>Day: </Text>
+                <TextInput
+                  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                  onChangeText={(workoutDay) => this.setState({workoutDay})}
+                  value={this.state.workoutDay}
+                />
+                <Text>Exercise: </Text>
+                <TextInput
+                  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                  onChangeText={(currentExercise) => this.setState({currentExercise})}
+                  value={this.state.currentExercise}
+                />
+                </View>
+              </View>
             </View>
           </View>
           <FlatList
