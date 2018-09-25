@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, FlatList, TextInput } from 'react-native';
+import {Button, FlatList, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-primitives';
 import LiftItem from './LiftItem';
 
@@ -11,8 +11,8 @@ class Workout extends React.Component {
         data: [],
         workoutDay: '',
         currentExercise: '',
-        currentSet: '',
-        currentReps: '',
+        currentSet: 0,
+        currentReps: 0,
         currentWeight: ''
       };
     }
@@ -43,6 +43,18 @@ class Workout extends React.Component {
         ),
       }
     };
+
+    onIncrementSet = () => {
+      this.setState((prevState) => ({
+        currentSet: prevState.currentSet += 1
+      }));
+    }
+    
+    onIncrementReps = () => {
+      this.setState((prevState) => ({
+        currentReps: prevState.currentReps += 1
+      }));
+    }
 
     _addItem = () => {
       this.setState((prevState) => ({
@@ -80,20 +92,24 @@ class Workout extends React.Component {
                 />
                 <View style={styles.exerciseStats}s>
                   <Text>Set: </Text>
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={(currentSet) => this.setState({currentSet})}
-                    value={this.state.currentSet}
-                  />
+                  <TouchableOpacity
+                     style={styles.statsTapCircle}
+                     onPress={this.onIncrementSet}>
+                    <Text>
+                      {this.state.currentSet.toString()}
+                    </Text>
+                  </TouchableOpacity>
                   <Text>Rep: </Text>
-                  <TextInput
-                    style={styles.input}
-                    onChangeText={(currentReps) => this.setState({currentReps})}
-                    value={this.state.currentReps}
-                  />
+                  <TouchableOpacity
+                     style={styles.statsTapCircle}
+                     onPress={this.onIncrementReps}>
+                    <Text>
+                      {this.state.currentReps.toString()}
+                    </Text>
+                  </TouchableOpacity>
                   <Text>Weight: </Text>
                   <TextInput
-                    style={styles.input}
+                    style={styles.statsInput}
                     onChangeText={(currentWeight) => this.setState({currentWeight})}
                     value={this.state.currentWeight}
                   />
@@ -135,12 +151,25 @@ const styles = StyleSheet.create({
   input: {
     borderColor: 'gray', 
     borderWidth: 1,
+    alignSelf: 'stretch',
+  },
+  statsTapCircle:{
+    width: 50,
+    height: 50,
+    borderRadius: 100/2,
+    backgroundColor: '#AA4936',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  statsInput: {
+    height: 20,
+    width: 30,
+    borderColor: 'gray', 
+    borderWidth: 1,
   },
   exerciseStats :{
-    // flex: 1, 
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'stretch',
   }
 })
 
