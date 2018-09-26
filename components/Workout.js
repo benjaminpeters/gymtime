@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, FlatList, TextInput, TouchableOpacity } from 'react-native';
+import { Button, VirtualizedList, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-primitives';
 import LiftItem from './LiftItem';
 
@@ -57,8 +57,14 @@ class Workout extends React.Component {
     }
 
     _addItem = () => {
+      workoutItem = {
+        exercise: this.state.currentExercise,
+        set: this.state.currentSet,
+        reps: this.state.currentReps,
+        weight: this.state.currentWeight
+      }
       this.setState((prevState) => ({
-        data: prevState.data.concat(this.state.currentExercise)
+        data: prevState.data.concat(workoutItem)
        }));
     };
   
@@ -66,7 +72,10 @@ class Workout extends React.Component {
     _renderItem = ({item}) => (
       <View>
         <LiftItem
-          data = {item}
+          exercise = {item.exercise}
+          set = {item.set}
+          reps = {item.reps}
+          weight = {item.weight}
           />
       </View>
     );
@@ -75,52 +84,60 @@ class Workout extends React.Component {
       return (
         <View style={styles.container}>
           <View style={styles.itemContainer}>
-          <View>
-            <View style={styles.addItemContainer}>
-              <View>
-                <Text>Day: </Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(workoutDay) => this.setState({workoutDay})}
-                  value={this.state.workoutDay}
-                />
-                <Text>Exercise: </Text>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={(currentExercise) => this.setState({currentExercise})}
-                  value={this.state.currentExercise}
-                />
-                <View style={styles.exerciseStats}s>
-                  <Text>Set: </Text>
-                  <TouchableOpacity
-                     style={styles.statsTapCircle}
-                     onPress={this.onIncrementSet}>
-                    <Text>
-                      {this.state.currentSet.toString()}
-                    </Text>
-                  </TouchableOpacity>
-                  <Text>Rep: </Text>
-                  <TouchableOpacity
-                     style={styles.statsTapCircle}
-                     onPress={this.onIncrementReps}>
-                    <Text>
-                      {this.state.currentReps.toString()}
-                    </Text>
-                  </TouchableOpacity>
-                  <Text>Weight: </Text>
+            <View>
+              <View style={styles.addItemContainer}>
+                <View>
+                  <Text>Day: </Text>
                   <TextInput
-                    style={styles.statsInput}
-                    onChangeText={(currentWeight) => this.setState({currentWeight})}
-                    value={this.state.currentWeight}
+                    style={styles.input}
+                    onChangeText={(workoutDay) => this.setState({workoutDay})}
+                    value={this.state.workoutDay}
                   />
-                </View>
+                  <Text>Exercise: </Text>
+                  <TextInput
+                    style={styles.input}
+                    onChangeText={(currentExercise) => this.setState({currentExercise})}
+                    value={this.state.currentExercise}
+                  />
+                  <View style={styles.exerciseStats}>
+                    <View style={styles.statsTapCircleContainer}>
+                      <Text>Set: </Text>
+                      <TouchableOpacity
+                        style={styles.statsTapCircle}
+                        onPress={this.onIncrementSet}>
+                        <Text style={styles.statsTapText}>
+                          {this.state.currentSet.toString()}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                    <View style={styles.statsTapCircleContainer}>
+                      <Text>Rep: </Text>
+                      <TouchableOpacity
+                        style={styles.statsTapCircle}
+                        onPress={this.onIncrementReps}>
+                        <Text style={styles.statsTapText}>
+                          {this.state.currentReps.toString()}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                    <View style={styles.statsTapCircleContainer}>
+                      <Text>Weight: </Text>
+                      <TextInput
+                        style={styles.statsInput}
+                        onChangeText={(currentWeight) => this.setState({currentWeight})}
+                        value={this.state.currentWeight}
+                      />
+                    </View>
+                  </View>
                 </View>
               </View>
             </View>
           </View>
-          <FlatList
+          <VirtualizedList
             style={styles.itemContainer}
             data={this.state.data}
+            getItem={(data, index) => data[index]}
+            getItemCount={data => data.length}
             extraData={this.state}
             _keyExtractor = {(item, index) => item.id}
             renderItem={this._renderItem}
@@ -145,13 +162,15 @@ const styles = StyleSheet.create({
   },
   addItemContainer: {
     backgroundColor: "#fff",
-    height: 150,
     paddingTop: 15,
   },
   input: {
     borderColor: 'gray', 
     borderWidth: 1,
     alignSelf: 'stretch',
+  },
+  statsTapCircleContainer:{
+    flexDirection: 'column',
   },
   statsTapCircle:{
     width: 50,
@@ -160,6 +179,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#AA4936',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  statsTapText: {
+    color: 'white'
   },
   statsInput: {
     height: 20,
