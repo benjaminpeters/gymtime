@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, VirtualizedList, TextInput, TouchableOpacity } from 'react-native';
+import { AsyncStorage, Button, VirtualizedList, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-primitives';
 import LiftItem from './LiftItem';
 
@@ -30,6 +30,10 @@ class Workout extends React.Component {
          }));
       }
     }
+
+    componentDidUpdate(){
+      this._storeData();
+    }
   
     static navigationOptions = ({ navigation }) => {
       return {
@@ -57,17 +61,29 @@ class Workout extends React.Component {
     }
 
     _addItem = () => {
+
       workoutItem = {
         exercise: this.state.currentExercise,
         set: this.state.currentSet,
         reps: this.state.currentReps,
-        weight: this.state.currentWeight
+        weight: this.state.currentWeight,
+        date: this.props.navigation.getParam("workoutDate")
       }
+
       this.setState((prevState) => ({
         data: prevState.data.concat(workoutItem)
        }));
+
+      console.log(this.state.data)
     };
-  
+
+    _storeData = async () => {
+      try {
+        await AsyncStorage.setItem('Workout', JSON.stringify(this.state.data));
+      } catch (error) {
+       console.log("_storeData ERROR")
+      }
+    }
 
     _renderItem = ({item}) => (
       <View>
@@ -81,6 +97,7 @@ class Workout extends React.Component {
     );
 
     render() {
+      
       return (
         <View style={styles.container}>
           <View style={styles.itemContainer}>
