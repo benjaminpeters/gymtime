@@ -5,8 +5,16 @@ var moment = require('moment');
 
 class HomeScreen extends React.Component {
 
+    constructor(props) {
+        super(props);
+          this.state = { 
+            prevWorkouts: []
+          };
+        }
+
     componentDidMount() {
         this.props.navigation.setParams({ handleOpenWorkout: this.handleOpenWorkout });
+        this._retrieveData();
       }
 
       static navigationOptions = ({ navigation }) => {
@@ -36,40 +44,45 @@ class HomeScreen extends React.Component {
         });
     }
 
-    _renderItem = ({item}) => (
+    _retrieveData = async () => {
+        try {
+          const value = await AsyncStorage.getItem('Workout');
+          
+          if (value !== null) {
+            this.setState((prevState) => ({
+                prevWorkouts: prevState.prevWorkouts.concat(JSON.parse(value))
+            }));
+          }
+          else {
+              console.log('null returned')
+          }
+         } catch (error) {
+           console.log("ERROR");
+           console.log(error);
+         }
+      }
+
+    _renderItem = ({item}) => {
+        console.log(item)
+        return (
         <WorkoutItem
             date={item.date}
-            type={item.type}
-            workout={item.workout}
+            exercise={item.exercise}
+            set={item.set}
+            reps={item.reps}
+            weight={item.weight}
+            workout={item}
             openWorkout={this.onAddWorkout}
         />
-      );
+        )};
     
     render() {
 
-        let prevWorkouts = [];
-        _retrieveData = async () => {
-            try {
-              const value = await AsyncStorage.getItem('Workout');
-              
-              if (value !== null) {
-                  console.log(value);
-                prevWorkouts = value
-              }
-              else {
-                  console.log('null returned')
-              }
-             } catch (error) {
-               console.log("ERROR");
-               console.log(error);
-             }
-          }
-          _retrieveData();
       return (
         <View style={styles.container}>
           <FlatList
             style={styles.itemContainer}
-            data={prevWorkouts}
+            data={this.state.prevWorkouts}
             extraData={this.state}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderItem}

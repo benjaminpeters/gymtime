@@ -1,28 +1,21 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+var moment = require('moment');
 
 class WorkoutItem extends React.Component {
   
     handleWorkoutTouch = () => {
-        this.props.openWorkout(this.props.workout, this.props.date);
+        this.props.openWorkout(this.props.workout, moment(this.props.date));
     }
 
     render() {
-        
       return (
         <TouchableHighlight onPress={this.handleWorkoutTouch} underlayColor="transparent">
             <View style={styles.container}>
                 <View style={styles.dateContainer}>
-                    <Text>{this.props.date.format('dddd')}</Text>
-                    <Text>{this.props.date.format("MMM Do YY")}</Text>
-                    <Text>{this.props.type}</Text>
+                    <Text>{this.props.exercise}</Text>
                 </View>
                 <View style={styles.liftContainer}>
-                    {this.props.workout && this.props.workout.map((value) => {
-                        return (
-                            <Text>{value['exercise']}</Text>
-                        );
-                    })}
                 </View>
             </View>
         </TouchableHighlight>
