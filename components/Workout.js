@@ -22,7 +22,6 @@ class Workout extends React.Component {
     }
 
     componentDidUpdate(){
-      this._storeData();
     }
   
     static navigationOptions = ({ navigation }) => {
@@ -62,9 +61,11 @@ class Workout extends React.Component {
 
       this.setState((prevState) => ({
         data: prevState.data.concat(workoutItem)
-       }));
+       }), () => {
+        this._storeData();
+      }
+      );
 
-      console.log(this.state.data)
     };
 
     _storeData = async () => {
