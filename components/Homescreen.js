@@ -39,23 +39,25 @@ class HomeScreen extends React.Component {
 
     handleOpenWorkout = (data) => {
         this.props.navigation.navigate('Workout', {
-            workoutData:  undefined,
+            workoutData:  this.state.prevWorkouts.length > 0 ? this.state.prevWorkouts : undefined,
             workoutDate: moment()
         });
     }
 
     _retrieveData = async () => {
         try {
-          const value = await AsyncStorage.getItem('Workout');
-          
-          if (value !== null) {
-            this.setState((prevState) => ({
-                prevWorkouts: prevState.prevWorkouts.concat(JSON.parse(value))
-            }));
-          }
-          else {
-              console.log('null returned')
-          }
+            AsyncStorage.getAllKeys((err, keys) => {
+                AsyncStorage.multiGet(keys, (err, stores) => {
+                    stores.map((result, i, store) => {
+                        // get at each store's key/value so you can work with it
+                        let key = store[i][0];
+                        let value = store[i][1];
+                        this.setState((prevState) => ({
+                            prevWorkouts: prevState.prevWorkouts.concat(JSON.parse(value))
+                        }));
+                    });
+                });
+            });
          } catch (error) {
            console.log("ERROR");
            console.log(error);

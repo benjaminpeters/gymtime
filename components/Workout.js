@@ -70,7 +70,7 @@ class Workout extends React.Component {
 
     _storeData = async () => {
       try {
-        await AsyncStorage.setItem('Workout', JSON.stringify(this.state.data));
+        await AsyncStorage.setItem(this.props.navigation.getParam("workoutDate"), JSON.stringify(this.state.data));
       } catch (error) {
        console.log("_storeData ERROR")
       }
