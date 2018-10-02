@@ -7,14 +7,17 @@ class Workout extends React.Component {
 
   constructor(props) {
     super(props);
+      let openedWorkout = this.props.navigation.getParam("workoutData")
       this.state = { 
-        data: [],
+        data: [openedWorkout],
         workoutDay: '',
         currentExercise: '',
         currentSet: 0,
         currentReps: 0,
         currentWeight: ''
       };
+
+
     }
 
     componentDidMount() {

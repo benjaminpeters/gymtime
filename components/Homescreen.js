@@ -3,12 +3,19 @@ import { AsyncStorage, Button, View, Text, FlatList, StyleSheet } from 'react-na
 import WorkoutItem from './WorkoutItem'
 var moment = require('moment');
 
+const defaultWorkout = {
+    exercise: "",
+    set: 0,
+    reps: 0, 
+    weight: 0, 
+    date: moment()
+}
 class HomeScreen extends React.Component {
 
     constructor(props) {
         super(props);
           this.state = { 
-            prevWorkouts: []
+            prevWorkouts: [],
           };
         }
 
@@ -39,7 +46,7 @@ class HomeScreen extends React.Component {
 
     handleOpenWorkout = (data) => {
         this.props.navigation.navigate('Workout', {
-            workoutData:  this.state.prevWorkouts.length > 0 ? this.state.prevWorkouts : undefined,
+            workoutData:  defaultWorkout,
             workoutDate: moment()
         });
     }
@@ -59,13 +66,11 @@ class HomeScreen extends React.Component {
                 });
             });
          } catch (error) {
-           console.log("ERROR");
            console.log(error);
          }
       }
 
     _renderItem = ({item}) => {
-        console.log(item)
         return (
         <WorkoutItem
             date={item.date}
