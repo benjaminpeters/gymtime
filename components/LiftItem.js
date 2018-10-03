@@ -7,10 +7,10 @@ class LiftItem extends React.Component {
         
       return (
         <View style={styles.container}>
-            <Text>{this.props.exercise} </Text>
-            <Text>{this.props.set} </Text>
-            <Text>{this.props.reps} </Text>
-            <Text>{this.props.weight}</Text>
+            <Text>Exercise: {this.props.exercise} </Text>
+            <Text>Set: {this.props.set} </Text>
+            <Text>Reps: {this.props.reps} </Text>
+            <Text>Weight: {this.props.weight}</Text>
         </View>
       );
     }
@@ -21,10 +21,10 @@ class LiftItem extends React.Component {
       container: {
         backgroundColor: "#fff",
         height: 75,
-        marginBottom: 15,
-        paddingTop: 15,
-        flexDirection: 'row',
-        alignItems: 'center',
+        // marginBottom: 15,
+        // paddingTop: 15,
+        flexDirection: 'column',
+        // alignItems: 'center',
       },
   })
 
