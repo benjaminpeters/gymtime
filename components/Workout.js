@@ -9,7 +9,7 @@ class Workout extends React.Component {
     super(props);
       let openedWorkout = this.props.navigation.getParam("workoutData")
       this.state = { 
-        data: [openedWorkout],
+        data: openedWorkout,
         workoutDay: '',
         currentExercise: '',
         currentSet: 0,
@@ -144,6 +144,7 @@ class Workout extends React.Component {
               </View>
             </View>
           </View>
+          { this.state.data[0] != null ? 
           <VirtualizedList
             style={styles.itemContainer}
             data={this.state.data}
@@ -153,6 +154,7 @@ class Workout extends React.Component {
             _keyExtractor = {(item, index) => item.id}
             renderItem={this._renderItem}
             />
+          : null}
         </View>
       );
     }
