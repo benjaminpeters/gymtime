@@ -2,6 +2,8 @@ import React from 'react';
 import { AsyncStorage, Button, VirtualizedList, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-primitives';
 import LiftItem from './LiftItem';
+var moment = require('moment');
+
 
 class Workout extends React.Component {
 
@@ -21,13 +23,10 @@ class Workout extends React.Component {
     componentDidMount() {
       this.props.navigation.setParams({ _addItem: this._addItem });
     }
-
-    componentDidUpdate(){
-    }
   
     static navigationOptions = ({ navigation }) => {
       return {
-        title: navigation.getParam("workoutDate").format("ddd MMM Do YYYY"),
+        title: navigation.getParam("workoutDate")._i,
         headerRight: (
           <Button
             onPress={navigation.getParam('_addItem')}

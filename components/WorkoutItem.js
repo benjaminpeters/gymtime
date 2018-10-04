@@ -21,7 +21,7 @@ class WorkoutItem extends React.Component {
         <TouchableHighlight onPress={this.handleWorkoutTouch} underlayColor="transparent">
             <View style={styles.container}>
                 <View style={styles.dateContainer}>
-                    <Text>{moment(this.state.date).format("ddd MMM Do YYYY")}</Text>
+                    <Text>{this.state.date}</Text>
                 </View>
                 <View style={styles.liftContainer}>
                 {

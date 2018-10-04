@@ -73,7 +73,6 @@ class HomeScreen extends React.Component {
       }
 
     _renderItem = ({item}) => {
-        // console.log(item);
         return (
         <WorkoutItem
             date={item.date}
