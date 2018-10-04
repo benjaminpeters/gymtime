@@ -20,6 +20,7 @@ class HomeScreen extends React.Component {
         }
 
     componentDidMount() {
+        this.props.navigation.setParams({ onAddWorkout: this.onAddWorkout });
         this.props.navigation.setParams({ handleOpenWorkout: this.handleOpenWorkout });
         this._retrieveData();
       }
@@ -29,7 +30,7 @@ class HomeScreen extends React.Component {
             title: 'GYMTIME',
             headerRight: (
                 <Button
-                    onPress={navigation.getParam('handleOpenWorkout')}
+                    onPress={navigation.getParam('onAddWorkout')}
                     title="Add"
                     color="#fff"
                 />
@@ -37,15 +38,15 @@ class HomeScreen extends React.Component {
             };
         }
 
-    onAddWorkout = (data, date) => {
+    handleOpenWorkout = (data, date) => {
         this.props.navigation.navigate('Workout', {
             workoutData: data,
             workoutDate: date
         });
     }
 
-    handleOpenWorkout = (data) => {
-        this.props.navigation.navigate('Workout', {
+    onAddWorkout = (data) => {
+        this.props.navigation.navigate('NewWorkout', {
             workoutData:  [null],
             workoutDate: moment()
         });
@@ -81,13 +82,13 @@ class HomeScreen extends React.Component {
             reps={item.reps}
             weight={item.weight}
             workout={item}
-            openWorkout={this.onAddWorkout}
+            openWorkout={this.handleOpenWorkout}
             item={item}
         />
         )};
     
     render() {
-// console.log(this.state.prevWorkouts)
+
       return (
         <View style={styles.container}>
           <FlatList

@@ -2,19 +2,20 @@ import React from 'react';
 import { AsyncStorage, Button, VirtualizedList, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-primitives';
 import LiftItem from './LiftItem';
+var moment = require('moment');
 
 class Workout extends React.Component {
 
   constructor(props) {
     super(props);
-      let openedWorkout = this.props.navigation.getParam("workoutData")
       this.state = { 
-        data: openedWorkout,
+        data: [],
         workoutDay: '',
         currentExercise: '',
         currentSet: 0,
         currentReps: 0,
-        currentWeight: ''
+        currentWeight: '',
+        date: moment().format("ddd MMM Do YYYY")
       };
     }
 
@@ -27,7 +28,7 @@ class Workout extends React.Component {
   
     static navigationOptions = ({ navigation }) => {
       return {
-        title: navigation.getParam("workoutDate").format("ddd MMM Do YYYY"),
+        title: moment().format("ddd MMM Do YYYY"),
         headerRight: (
           <Button
             onPress={navigation.getParam('_addItem')}
@@ -57,7 +58,7 @@ class Workout extends React.Component {
         set: this.state.currentSet,
         reps: this.state.currentReps,
         weight: this.state.currentWeight,
-        date: this.props.navigation.getParam("workoutDate")
+        date: this.state.date
       }
 
       this.setState((prevState) => ({
@@ -71,7 +72,7 @@ class Workout extends React.Component {
 
     _storeData = async () => {
       try {
-        await AsyncStorage.setItem(this.props.navigation.getParam("workoutDate"), JSON.stringify(this.state.data));
+        await AsyncStorage.setItem(this.state.date, JSON.stringify(this.state.data));
       } catch (error) {
        console.log("_storeData ERROR")
       }
