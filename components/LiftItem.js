@@ -21,10 +21,7 @@ class LiftItem extends React.Component {
       container: {
         backgroundColor: "#fff",
         height: 75,
-        // marginBottom: 15,
-        // paddingTop: 15,
         flexDirection: 'column',
-        // alignItems: 'center',
       },
   })
 

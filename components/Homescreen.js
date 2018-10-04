@@ -59,8 +59,9 @@ class HomeScreen extends React.Component {
                         // get at each store's key/value so you can work with it
                         let key = store[i][0];
                         let value = store[i][1];
+
                         this.setState((prevState) => ({
-                            prevWorkouts: prevState.prevWorkouts.concat(JSON.parse(value))
+                            prevWorkouts: prevState.prevWorkouts.concat(store)
                         }));
                     });
                 });
@@ -71,6 +72,7 @@ class HomeScreen extends React.Component {
       }
 
     _renderItem = ({item}) => {
+        // console.log(item);
         return (
         <WorkoutItem
             date={item.date}
@@ -80,11 +82,12 @@ class HomeScreen extends React.Component {
             weight={item.weight}
             workout={item}
             openWorkout={this.onAddWorkout}
+            item={item}
         />
         )};
     
     render() {
-
+// console.log(this.state.prevWorkouts)
       return (
         <View style={styles.container}>
           <FlatList

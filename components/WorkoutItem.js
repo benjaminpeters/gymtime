@@ -4,8 +4,16 @@ var moment = require('moment');
 
 class WorkoutItem extends React.Component {
   
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: this.props.item[0],
+      workoutArr: JSON.parse(this.props.item[1])
+    }
+  }
+
     handleWorkoutTouch = () => {
-        this.props.openWorkout(this.props.workout, moment(this.props.date));
+        this.props.openWorkout(this.state.workoutArr, moment(this.state.date));
     }
 
     render() {
@@ -13,9 +21,16 @@ class WorkoutItem extends React.Component {
         <TouchableHighlight onPress={this.handleWorkoutTouch} underlayColor="transparent">
             <View style={styles.container}>
                 <View style={styles.dateContainer}>
-                    <Text>{this.props.exercise}</Text>
+                    <Text>{moment(this.state.date).format("ddd MMM Do YYYY")}</Text>
                 </View>
                 <View style={styles.liftContainer}>
+                {
+                  this.state.workoutArr.map((val) => (
+                      <Text>{val.exercise}</Text>
+                    )
+                  )
+                }
+                 
                 </View>
             </View>
         </TouchableHighlight>
@@ -39,7 +54,7 @@ class WorkoutItem extends React.Component {
         paddingLeft: 15
       },
       liftContainer:{
-        paddingLeft: 25,
+        paddingLeft: 5,
         flex: 1,
         flexWrap:'wrap'
       }
