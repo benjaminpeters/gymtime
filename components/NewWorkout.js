@@ -2,7 +2,9 @@ import React from 'react';
 import { AsyncStorage, Button, VirtualizedList, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-primitives';
 import LiftItem from './LiftItem';
+
 var moment = require('moment');
+const uuidv1 = require('uuid/v1');
 
 class Workout extends React.Component {
 
@@ -58,7 +60,8 @@ class Workout extends React.Component {
         set: this.state.currentSet,
         reps: this.state.currentReps,
         weight: this.state.currentWeight,
-        date: this.state.date
+        date: this.state.date,
+        key: uuidv1(),
       }
 
       this.setState((prevState) => ({

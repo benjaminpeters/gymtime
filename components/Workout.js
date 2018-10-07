@@ -2,8 +2,9 @@ import React from 'react';
 import { AsyncStorage, Button, VirtualizedList, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-primitives';
 import LiftItem from './LiftItem';
-var moment = require('moment');
 
+var moment = require('moment');
+const uuidv1 = require('uuid/v1');
 
 class Workout extends React.Component {
 
@@ -50,29 +51,33 @@ class Workout extends React.Component {
     }
 
     _addItem = () => {
-
+      
       workoutItem = {
         exercise: this.state.currentExercise,
         set: this.state.currentSet,
         reps: this.state.currentReps,
         weight: this.state.currentWeight,
-        date: this.props.navigation.getParam("workoutDate")
+        date: this.props.navigation.getParam("workoutDate")._i,
+        key: uuidv1(),
       }
 
       this.setState((prevState) => ({
         data: prevState.data.concat(workoutItem)
        }), () => {
         this._storeData();
-      }
+        }
       );
+
+
 
     };
 
     _storeData = async () => {
       try {
-        await AsyncStorage.setItem(this.props.navigation.getParam("workoutDate"), JSON.stringify(this.state.data));
+        await AsyncStorage.setItem(this.props.navigation.getParam("workoutDate")._i, JSON.stringify(this.state.data));
       } catch (error) {
        console.log("_storeData ERROR")
+       console.log(error)
       }
     }
 
@@ -86,6 +91,11 @@ class Workout extends React.Component {
           />
       </View>
     );
+
+    _keyExtractor(item, index){
+      console.log(item.key);
+      return item.key;
+  }
 
     render() {
       
@@ -147,7 +157,7 @@ class Workout extends React.Component {
             getItem={(data, index) => data[index]}
             getItemCount={data => data.length}
             extraData={this.state}
-            _keyExtractor = {(item, index) => item.id}
+            keyExtractor={this._keyExtractor}
             renderItem={this._renderItem}
             />
         </View>

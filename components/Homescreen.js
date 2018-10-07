@@ -3,13 +3,6 @@ import { AsyncStorage, Button, View, Text, FlatList, StyleSheet } from 'react-na
 import WorkoutItem from './WorkoutItem'
 var moment = require('moment');
 
-const defaultWorkout = {
-    exercise: "",
-    set: 0,
-    reps: 0, 
-    weight: 0, 
-    date: moment()
-}
 class HomeScreen extends React.Component {
 
     constructor(props) {
@@ -22,6 +15,10 @@ class HomeScreen extends React.Component {
     componentDidMount() {
         this.props.navigation.setParams({ onAddWorkout: this.onAddWorkout });
         this.props.navigation.setParams({ handleOpenWorkout: this.handleOpenWorkout });
+        this._retrieveData();
+      }
+
+      refresh() {
         this._retrieveData();
       }
 
@@ -41,14 +38,16 @@ class HomeScreen extends React.Component {
     handleOpenWorkout = (data, date) => {
         this.props.navigation.navigate('Workout', {
             workoutData: data,
-            workoutDate: date
+            workoutDate: date,
+            refreshHomescreen: this.refresh,
         });
     }
 
     onAddWorkout = (data) => {
         this.props.navigation.navigate('NewWorkout', {
             workoutData:  [null],
-            workoutDate: moment()
+            workoutDate: moment(),
+            refreshHomescreen: this.refresh,
         });
     }
 
@@ -84,7 +83,13 @@ class HomeScreen extends React.Component {
             openWorkout={this.handleOpenWorkout}
             item={item}
         />
-        )};
+    )};
+
+    _keyExtractor(item, index){
+        let workoutobj = JSON.parse(item[1]);
+        let key = workoutobj[0].key;
+        return key;
+    }
     
     render() {
 

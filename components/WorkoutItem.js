@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+
 var moment = require('moment');
+const uuidv1 = require('uuid/v1');
 
 class WorkoutItem extends React.Component {
   
@@ -26,7 +28,7 @@ class WorkoutItem extends React.Component {
                 <View style={styles.liftContainer}>
                 {
                   this.state.workoutArr.map((val) => (
-                      <Text>{val.exercise}</Text>
+                      <Text key={uuidv1()}>{val.exercise}</Text>
                     )
                   )
                 }
