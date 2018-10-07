@@ -62,7 +62,7 @@ class HomeScreen extends React.Component {
                         let value = store[i][1];
 
                         this.setState((prevState) => ({
-                            prevWorkouts: prevState.prevWorkouts.concat(store)
+                            prevWorkouts: store
                         }));
                     });
                 });
