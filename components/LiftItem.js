@@ -8,9 +8,7 @@ class LiftItem extends React.Component {
       return (
         <View style={styles.container}>
             <Text>Exercise: {this.props.exercise} </Text>
-            <Text>Set: {this.props.set} </Text>
-            <Text>Reps: {this.props.reps} </Text>
-            <Text>Weight: {this.props.weight}</Text>
+            <Text>Set: {this.props.sets} </Text>
         </View>
       );
     }

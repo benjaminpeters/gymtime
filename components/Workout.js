@@ -51,23 +51,43 @@ class Workout extends React.Component {
     }
 
     _addItem = () => {
-      
-      workoutItem = {
-        exercise: this.state.currentExercise,
-        set: this.state.currentSet,
+
+      set = {
         reps: this.state.currentReps,
         weight: this.state.currentWeight,
-        date: this.props.navigation.getParam("workoutDate")._i,
-        key: uuidv1(),
       }
-
-      this.setState((prevState) => ({
-        data: prevState.data.concat(workoutItem)
-       }), () => {
-        this._storeData();
+    
+      if(this.state.data.length === 0){
+        workoutItem = {
+          exercise: this.state.currentExercise,
+          set: this.state.currentSet,
+          sets: [set],
+          date: this.props.navigation.getParam("workoutDate")._i,
+          key: uuidv1(),
         }
-      );
 
+        
+        this.setState((prevState) => ({
+          data: [workoutItem]
+         }), () => {
+          this._storeData();
+          }
+        );
+      } else {
+        this.state.data.forEach(element => {
+          if (element.exercise === this.state.currentExercise){
+            
+            element.reps.concat(set)
+          }
+        });
+
+        this.setState((prevState) => ({
+          data: prevState.data.concat(workoutItem)
+         }), () => {
+          this._storeData();
+          }
+        );
+      }
 
 
     };
@@ -85,15 +105,13 @@ class Workout extends React.Component {
       <View>
         <LiftItem
           exercise = {item.exercise}
-          set = {item.set}
-          reps = {item.reps}
-          weight = {item.weight}
+          sets = {item.sets}
           />
       </View>
     );
 
     _keyExtractor(item, index){
-      console.log(item.key);
+      // console.log(item.key);
       return item.key;
   }
 

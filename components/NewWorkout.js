@@ -55,21 +55,41 @@ class Workout extends React.Component {
 
     _addItem = () => {
 
-      workoutItem = {
-        exercise: this.state.currentExercise,
-        set: this.state.currentSet,
+      set = [{
         reps: this.state.currentReps,
         weight: this.state.currentWeight,
-        date: this.state.date,
-        key: uuidv1(),
-      }
+      }]
+    
+      if(this.state.data.length === 0){
+        workoutItem = [{
+          exercise: this.state.currentExercise,
+          set: this.state.currentSet,
+          sets: set,
+          date: this.props.navigation.getParam("workoutDate")._i,
+          key: uuidv1(),
+        }]
+        console.log(workoutItem )
+        this.setState((prevState) => ({
+          data: workoutItem
+         }), () => {
+          this._storeData();
+          }
+        );
+      } else {
+        this.state.data.forEach(element => {
+          console.log(element)
+          if (element.exercise === this.state.currentExercise){
+            element.sets.concat(set)
+          }
+        });
 
-      this.setState((prevState) => ({
-        data: prevState.data.concat(workoutItem)
-       }), () => {
-        this._storeData();
+        this.setState((prevState) => ({
+          data: prevState.data.concat(workoutItem)
+         }), () => {
+          this._storeData();
+          }
+        );
       }
-      );
 
     };
 
@@ -85,9 +105,7 @@ class Workout extends React.Component {
       <View>
         <LiftItem
           exercise = {item.exercise}
-          set = {item.set}
-          reps = {item.reps}
-          weight = {item.weight}
+          sets = {item.set}
           />
       </View>
     );
